@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestApplication.Interfaces;
 using TestApplication.Models;
@@ -12,34 +13,21 @@ namespace TestApplication.Controllers
     {
         private readonly IStudentsRepository studentsRepository;
         private readonly IGenderRepository genderRepository;
+        private readonly IMediator _mediator;
 
-        public StudentsController(IStudentsRepository studentRepository, IGenderRepository genderRepository)
+        public StudentsController(IStudentsRepository studentRepository, IGenderRepository genderRepository, IMediator mediator)
         {
             this.studentsRepository = studentRepository;
             this.genderRepository = genderRepository;
+            this._mediator = mediator;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Students>))]
-        public IActionResult GetStudents()
+        public async Task<IActionResult> GetStudents()
         {
-            var studentsWithGender = studentsRepository.GetStudents();
-
-            var studentsWithAgeAndGender = studentsWithGender.Select(s => new
-            {
-                s.Id,
-                s.FirstName,
-                s.LastName,
-                s.Gender.Description,
-                Age = CalculateAge(s.BirthDate)
-            }).ToList();
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok(studentsWithAgeAndGender);
+            var response = await _mediator.Send(new GetStudentRequest());
+            return Ok(response);
         }
 
         [HttpGet("{id}")]

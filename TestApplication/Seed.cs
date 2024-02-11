@@ -23,6 +23,16 @@ namespace TestApplication.Data
                 return;
             }
 
+            //Seed data with Genders
+            dataContext.Genders.AddRange(new Gender
+            {
+                Description = "Male"
+            },
+            new Gender
+            {
+                Description = "Female"
+            });
+
             // Seed the database with sample students
             dataContext.Students.AddRange(
                 new Students
