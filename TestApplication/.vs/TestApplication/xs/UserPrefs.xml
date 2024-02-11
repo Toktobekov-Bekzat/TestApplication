@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{5FE7307E-C9E5-4ADE-B87E-1E17004DF288}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/StudentsController.cs">
+    <Files>
+      <File FileName="Data/DataContext.cs" />
+      <File FileName="Models/Students.cs" />
+      <File FileName="Models/Gender.cs" />
+      <File FileName="Controllers/StudentsController.cs" Line="32" Column="28" />
+      <File FileName="Repository/GenderRepository.cs" />
+      <File FileName="Interfaces/IGenderRepository.cs" />
+      <File FileName="Program.cs" />
+      <File FileName="Seed.cs" />
+      <File FileName="appsettings.json" />
+      <File FileName="Repository/StudentsRepository.cs" />
+      <File FileName="Interfaces/IStudentsRepository.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="TestApplication" expanded="True">
+            <Node name=".git" selected="True" />
+            <Node name="TestApplication">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TestApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

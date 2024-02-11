@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{B0A2B987-49A8-4279-801B-85ABC1CD058F}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestApplication/appsettings.json">
+    <Files>
+      <File FileName="TestApplication/Program.cs" />
+      <File FileName="TestApplication/Seed.cs" />
+      <File FileName="TestApplication/appsettings.json" Line="10" Column="40" />
+      <File FileName="TestApplication/Models/Students.cs" />
+      <File FileName="TestApplication/Data/DataContext.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TestApplication" expanded="True" selected="True">
+            <Node name="TestApplication" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.TestApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
