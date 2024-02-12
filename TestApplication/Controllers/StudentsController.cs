@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TestApplication.Controllers.Requests;
 using TestApplication.Interfaces;
 using TestApplication.Models;
 using TestApplication.Repository;
@@ -31,87 +32,54 @@ namespace TestApplication.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(200, Type = typeof(object))]
-        public IActionResult GetStudentByID(int id)
+        [ProducesResponseType(200, Type = typeof(GetStudentRequestDto))]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetStudentById(int id)
         {
-            var student = studentsRepository.GetStudentById(id);
+            var request = new GetStudentByIdRequest { StudentId = id };
+            var response = await _mediator.Send(request);
 
-            if (student == null)
+            if (response == null)
             {
                 return NotFound();
             }
 
-            var studentWithAge = new
-            {
-                student.Id,
-                student.FirstName,
-                student.LastName,
-                student.Gender.Description,
-                Age = CalculateAge(student.BirthDate)
-            };
-
-            return Ok(studentWithAge);
+            return Ok(response);
         }
+
 
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public IActionResult AddStudent([FromBody] Students student)
+        public async Task<IActionResult> AddStudent([FromBody] AddStudentRequest request)
         {
-            if (student == null)
+            var response = await _mediator.Send(request);
+
+            if (response == null)
             {
-                return BadRequest("Student data is null.");
+                return BadRequest("Failed to add student.");
             }
 
-            try
-            {
-                // Fetch the gender information based on the GenderId provided
-                student.Gender = genderRepository.GetGenderByKey(student.GenderId);
-
-                studentsRepository.AddStudent(student);
-                return CreatedAtAction(nameof(GetStudentByID), new { id = student.Id }, student);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            return CreatedAtAction(nameof(GetStudentById), new { id = response.Id }, response);
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type = typeof(GetStudentRequestDto))]
         [ProducesResponseType(404)]
-        public IActionResult DeleteStudentById(int id)
+        public async Task<IActionResult> DeleteStudentById(int id)
         {
-            var student = studentsRepository.GetStudentById(id);
+            var request = new DeleteStudentByIdRequest { StudentId = id };
+            var response = await _mediator.Send(request);
 
-            if (student == null)
+            if (response == null)
             {
                 return NotFound();
             }
 
-            try
-            {
-                studentsRepository.DeleteStudentById(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            return Ok(response);
         }
 
 
-        private int CalculateAge(DateTime dateOfBirth)
-        {
-            var today = DateTime.Today;
-            var age = today.Year - dateOfBirth.Year;
 
-            if (dateOfBirth.Date > today.AddYears(-age))
-                age--;
-
-            return age;
-
-            //helper for the time
-        }
     }
 }
